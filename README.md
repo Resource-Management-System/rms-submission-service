@@ -1,4 +1,4 @@
-# rms-application-service
+# rms-submission-service
 
 The rms api provides a backend to the rms ui. 
 
@@ -19,11 +19,11 @@ This can be configured in the application.yml
 **Running unit tests**
 `mvn clean test`
 **Health endpoint**
-https://localhost:5000/actuator/health
+https://localhost:5001/actuator/health
 
 **Springdocs API descriptors:**
-https://localhost:5000/v3/api-docs/
+https://localhost:5001/v3/api-docs/
 
 **Swagger UI Documentation:** 
-https://localhost:5000/swagger-ui.html
+https://localhost:5001/swagger-ui.html
 
