@@ -86,7 +86,7 @@ class RoleSubmissionServiceTest {
 
     @Test
     void removeRoleSubmission_internalServerException() {
-        doThrow(new InternalServiceException("ex", new HibernateException("ex")))
+        doThrow(new HibernateException("ex", new HibernateException("ex")))
                 .when(roleSubmissionRepository).deleteById(eq((SUBMISSION_ID)));
         assertThrows(InternalServiceException.class, () -> roleSubmissionService.removeRoleSubmission(SUBMISSION_ID));
         verify(roleSubmissionRepository, times(1)).deleteById(eq(SUBMISSION_ID));
@@ -104,7 +104,7 @@ class RoleSubmissionServiceTest {
 
     @Test
     void submitNewApplication_internalServerException() {
-        doThrow(new InternalServiceException("ex", new HibernateException("ex")))
+        doThrow(new HibernateException("ex", new HibernateException("ex")))
                 .when(roleSubmissionRepository).save(any(RoleSubmission.class));
         assertThrows(InternalServiceException.class, () -> roleSubmissionService.submitNewApplication(buildSubCreateReq()));
     }
