@@ -14,7 +14,7 @@ This can be configured in the application.yml
 `mvn clean package`
 
 **Running the application**
-`java -jar target/rms-api-<version>.jar`
+`java -jar target/rms-submission-service-<version>.jar`
 
 **Running unit tests**
 `mvn clean test`
