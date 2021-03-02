@@ -40,7 +40,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(RoleSubmissionController.class)
 class RoleSubmissionControllerTest {
 
-
     @Autowired
     private MockMvc mvc;
 
@@ -49,7 +48,6 @@ class RoleSubmissionControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-
 
     @Test
     void getRoleSubmission_happyPath() throws Exception {
@@ -93,11 +91,11 @@ class RoleSubmissionControllerTest {
         RoleSubmissions submissions = RoleSubmissions.builder()
                 .roleSubmissions(List.of(buildTargetSubmission()))
                 .build();
-        when(service.retrieveRoleSubmissionsForRM(eq(RM_ID)))
+        when(service.retrieveRoleSubmissionsForBu(eq(BUSINESS_UNIT_ID)))
                 .thenReturn(submissions);
 
         ResultActions resultActions = this.mvc.perform(get("/role/submissions")
-                .queryParam("rmId", "1"))
+                .queryParam("buId", BUSINESS_UNIT_ID.toString()))
                 .andDo(print())
                 .andExpect(status().isOk());
 
@@ -111,11 +109,11 @@ class RoleSubmissionControllerTest {
 
     @Test
     void getNewRoleRequests_internalServiceException() throws Exception {
-        when(service.retrieveRoleSubmissionsForRM(eq(RM_ID)))
+        when(service.retrieveRoleSubmissionsForBu(eq(BUSINESS_UNIT_ID)))
                 .thenThrow(InternalServiceException.class);
 
         this.mvc.perform(get("/role/submissions")
-                .queryParam("rmId", "1"))
+                .queryParam("buId", BUSINESS_UNIT_ID.toString()))
                 .andDo(print())
                 .andExpect(status().isInternalServerError());
     }
@@ -165,6 +163,9 @@ class RoleSubmissionControllerTest {
     void postNewRoleSub_internalServiceException() throws Exception {
 
         RoleCreateReq roleCreateReq = buildSubCreateReq();
+        when(service.submitNewApplication(eq(roleCreateReq)))
+                .thenReturn(buildTargetSubmission());
+
 
         this.mvc.perform(post("/role/submission/submit")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -174,14 +175,14 @@ class RoleSubmissionControllerTest {
                                 "\"roleName\":\"ROLE_NAME\"," +
                                 "\"projectName\": \"PROJECT_NAME\", " +
                                 "\"roleType\": \"BUSINESS_ANALYST\", " +
-                                "\"startDate\": \"2010-01-01\", " +
-                                "\"endDate\": \"2012-01-01\", " +
+                                "\"startDate\": \""+TARGET_START_DATE+"\", " +
+                                "\"endDate\": \""+ TARGET_END_DATE+"\", " +
                                 "\"projectCode\": \"2\", " +
                                 "\"accountNumber\": \"1\", " +
                                 "\"accountName\": \"ACCOUNT_NAME\", " +
                                 "\"description\":\"DESC\"," +
                                 "\"baseLocation\": \"ASTON\", " +
-                                "\"businessUnit\": \"1\"" +
+                                "\"businessUnit\": " +BUSINESS_UNIT_ID +
                             "}, " +
                             "\"certainty\": \"100.00\"" +
                         "}"))

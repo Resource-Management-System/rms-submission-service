@@ -14,13 +14,21 @@ public class TargetSubmissionBuilder {
     public static final Long ROLE_ID = 1L;
     public static final Long CANDIDATE_ID = 2L;
     public static final Long SUBMISSION_ID = 3L;
-    public static final Long RM_ID = 1L;
+    public static final Long BUSINESS_UNIT_ID = 4L;
+
+    public static final LocalDate TARGET_START_DATE = LocalDate.of(
+            2012, 1, 1);
+    public static final LocalDate TARGET_END_DATE = LocalDate.of(
+            2010, 1, 1);
 
     public static TargetRoleSubmission buildTargetSubmission(){
         return TargetRoleSubmission.builder()
                 .candidateId(CANDIDATE_ID)
                 .submissionId(SUBMISSION_ID)
-                .submittedRole(TargetRole.builder().id(ROLE_ID).build())
+                .submittedRole(TargetRole.builder()
+                        .id(ROLE_ID)
+                        .businessUnit(BUSINESS_UNIT_ID)
+                        .build())
                 .build();
     }
 
@@ -34,11 +42,11 @@ public class TargetSubmissionBuilder {
                         .accountNumber("1")
                         .baseLocation(BaseLocation.ASTON)
                         .description("DESC")
-                        .endDate(LocalDate.of(2012, 1, 1))
-                        .startDate(LocalDate.of(2010, 1, 1))
+                        .endDate(TARGET_END_DATE)
+                        .startDate(TARGET_START_DATE)
                         .projectCode("2")
                         .projectName("PROJECT_NAME")
-                        .businessUnit(1L)
+                        .businessUnit(BUSINESS_UNIT_ID)
                         .build())
                 .userId(CANDIDATE_ID)
                 .build();

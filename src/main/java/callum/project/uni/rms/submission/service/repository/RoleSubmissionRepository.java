@@ -12,6 +12,6 @@ import java.util.List;
 public interface RoleSubmissionRepository extends CrudRepository<RoleSubmission, Long> {
 
 
-    @Query(value = "SELECT rs.* FROM role_submission rs INNER JOIN user u ON rs.candidate_id = u.id WHERE u.resource_manager_id = :rm_id", nativeQuery = true)
-    public List<RoleSubmission> findAllSubmissionsForRm(@Param("rm_id") Long rmid);
+    @Query
+    public List<RoleSubmission> findAllByBusinessUnitId(Long buId);
 }

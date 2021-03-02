@@ -18,10 +18,10 @@ class RoleSubmissionController {
 
     private final RoleSubmissionService roleSubmissionService;
     
-    @GetMapping(value = "/role/submissions", params = "rmId")
+    @GetMapping(value = "/role/submissions", params = "buId")
     @ResponseStatus(HttpStatus.OK)
-    public AbstractServiceResponse getNewRoleRequests(@RequestParam @NonNull Long rmId) {
-        return roleSubmissionService.retrieveRoleSubmissionsForRM(rmId);
+    public AbstractServiceResponse getNewRoleRequests(@RequestParam @NonNull Long buId) {
+        return roleSubmissionService.retrieveRoleSubmissionsForBu(buId);
     }
 
     @GetMapping(value = "/role/submission/{subId}")

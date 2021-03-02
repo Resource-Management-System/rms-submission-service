@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import static callum.project.uni.rms.submission.helper.SourceSubmissionBuilder.buildSourceRoleSubmission;
+import static callum.project.uni.rms.submission.helper.SourceSubmissionBuilder.*;
 import static callum.project.uni.rms.submission.helper.TargetSubmissionBuilder.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,10 +23,10 @@ class RoleSubmissionMapperTest {
         assertEquals("ACCOUNT_NAME", role.getAccountName());
         assertEquals("1", role.getAccountNumber());
         assertEquals(BaseLocation.ASTON, role.getBaseLocation());
-        assertEquals(1L, role.getBusinessUnit());
+        assertEquals(BUSINESS_UNIT_ID, role.getBusinessUnit());
         assertEquals("DESC", role.getDescription());
-        assertEquals(LocalDate.of(2012, 1, 1), role.getEndDate());
-        assertEquals(LocalDate.of(2012, 1, 1), role.getStartDate());
+        assertEquals(TARGET_END_DATE, role.getEndDate());
+        assertEquals(TARGET_START_DATE, role.getStartDate());
         assertEquals("2", role.getProjectCode());
         assertEquals("PROJECT_NAME", role.getProjectName());
         assertEquals("ROLE_NAME", role.getRoleName());
@@ -44,10 +44,10 @@ class RoleSubmissionMapperTest {
         assertEquals("ACCOUNT_NAME", roleSubmission.getAccountName());
         assertEquals("1", roleSubmission.getAccountNumber());
         assertEquals(BaseLocation.ASTON, roleSubmission.getBaseLocation());
-        assertEquals(1L, roleSubmission.getBusinessUnitId());
+        assertEquals(BUSINESS_UNIT_ID, roleSubmission.getBusinessUnitId());
         assertEquals("DESC", roleSubmission.getDescription());
-        assertEquals(Date.valueOf(LocalDate.of(2012, 1, 1)), roleSubmission.getEndDate());
-        assertEquals(Date.valueOf(LocalDate.of(2010, 1, 1)), roleSubmission.getStartDate());
+        assertEquals(SOURCE_END_DATE, roleSubmission.getEndDate());
+        assertEquals(SOURCE_START_DATE, roleSubmission.getStartDate());
         assertEquals("2", roleSubmission.getProjectCode());
         assertEquals("PROJECT_NAME", roleSubmission.getProjectName());
         assertEquals("ROLE_NAME", roleSubmission.getRoleName());

@@ -27,10 +27,10 @@ public class RoleSubmissionService {
 
     private final RoleSubmissionRepository repository;
 
-    public RoleSubmissions retrieveRoleSubmissionsForRM(long rmId) {
+    public RoleSubmissions retrieveRoleSubmissionsForBu(long buId) {
 
         try {
-            List<RoleSubmission> roleSubmissionList = repository.findAllSubmissionsForRm(rmId);
+            List<RoleSubmission> roleSubmissionList = repository.findAllByBusinessUnitId(buId);
 
             List<TargetRoleSubmission> targetRoleSubmissions = roleSubmissionList.parallelStream()
                     .map(RoleSubmissionMapper::mapRoleSubmissionToTarget)

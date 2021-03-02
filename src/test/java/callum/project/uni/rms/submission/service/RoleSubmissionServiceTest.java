@@ -36,19 +36,19 @@ class RoleSubmissionServiceTest {
 
     @Test
     void retrieveRoleSubmissionsForRM_happyPath() {
-        when(roleSubmissionRepository.findAllSubmissionsForRm(eq(RM_ID)))
+        when(roleSubmissionRepository.findAllByBusinessUnitId(eq(BUSINESS_UNIT_ID)))
                 .thenReturn(List.of(buildSourceRoleSubmission()));
-        RoleSubmissions subs = roleSubmissionService.retrieveRoleSubmissionsForRM(RM_ID);
+        RoleSubmissions subs = roleSubmissionService.retrieveRoleSubmissionsForBu(BUSINESS_UNIT_ID);
         assertEquals(SUBMISSION_ID, subs.getRoleSubmissions().get(0).getSubmissionId());
         assertEquals(CANDIDATE_ID, subs.getRoleSubmissions().get(0).getCandidateId());
     }
 
     @Test
     void retrieveRoleSubmissionsForRM_internalServerError() {
-        when(roleSubmissionRepository.findAllSubmissionsForRm(eq(RM_ID)))
+        when(roleSubmissionRepository.findAllByBusinessUnitId(eq(BUSINESS_UNIT_ID)))
                 .thenThrow(HibernateException.class);
         assertThrows(InternalServiceException.class,
-                () -> roleSubmissionService.retrieveRoleSubmissionsForRM(RM_ID));
+                () -> roleSubmissionService.retrieveRoleSubmissionsForBu(BUSINESS_UNIT_ID));
     }
 
     @Test
