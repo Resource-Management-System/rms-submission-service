@@ -14,7 +14,7 @@ ompiled class file
 
 *.iml
 
-target/
+/target/
 
 # Package Files #
 *.jar
